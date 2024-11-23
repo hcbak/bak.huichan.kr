@@ -30,10 +30,12 @@ jobs:
       run: chmod +x ./backend/main/gradlew
 
     - name: Build with Gradle Wrapper
-      run: ./backend/main/gradlew build
+      run: ./gradlew build
+      working-directory: ./backend/main
 
     - name: Run Tests
-      run: ./backend/main/gradlew test
+      run: ./gradlew test
+      working-directory: ./backend/main
       continue-on-error: true
 
     - name: Archive Test Results
