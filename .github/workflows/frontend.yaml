@@ -21,6 +21,8 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
+        working-directory: ./frontend/main
 
       - name: Build Project
         run: npm run build
+        working-directory: ./frontend/main
