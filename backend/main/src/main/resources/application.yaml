@@ -1,3 +1,8 @@
 spring:
   application:
     name: main
+  config:
+    import: optional:environment.properties
+  data:
+    mongodb:
+      uri: mongodb://${MONGO_SERVER}:${MONGO_PORT}/${MONGO_DATABASE}
