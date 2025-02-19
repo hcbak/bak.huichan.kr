@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import kr.huichan.bak.main.dto.NavbarMenu;
+import kr.huichan.bak.main.dto.NavbarMenuDocument;
 import kr.huichan.bak.main.repository.NavbarRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class NavbarService {
         NavbarMenu navbarMenu = null;
 
         try {
-            navbarMenu = navbarRepository.findAll().stream().findFirst().get();
+            navbarMenu = navbarRepository.findAll().stream().findFirst().get().menu();
         } catch (NoSuchElementException e) {
             log.info("Collection is nof found.");
             navbarMenu = initialNavbar();
@@ -34,11 +35,26 @@ public class NavbarService {
     public NavbarMenu initialNavbar() {
         log.info("Inserting initial data.");
 
-        navbarRepository.insert(new NavbarMenu("root", null, null));
+        navbarRepository.insert(new NavbarMenuDocument(
+            null, 
+            new NavbarMenu("root", null, null)));
 
-        return navbarRepository.findAll().stream().findFirst().get();
+        return navbarRepository.findAll().stream().findFirst().get().menu();
     }
- 
+
+    // 네비게이션바 수정
+    public void updateNavbarMenu(NavbarMenu navbarMenuRequest) {
+        log.info("Updating Navigation Bar.");
+
+        NavbarMenuDocument navbarMenu = navbarRepository.findAll().stream().findFirst().get();
+
+        navbarMenu = new NavbarMenuDocument(
+            navbarMenu.id(),
+            navbarMenuRequest);
+
+        navbarRepository.save(navbarMenu);
+    }
+
     public NavbarService(NavbarRepository navbarRepository) {
         this.navbarRepository = navbarRepository;
     }

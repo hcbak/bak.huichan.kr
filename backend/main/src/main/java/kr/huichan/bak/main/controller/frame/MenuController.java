@@ -1,7 +1,10 @@
 package kr.huichan.bak.main.controller.frame;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +25,15 @@ public class MenuController {
     public ResponseEntity<NavbarMenu> getMenu () {
 
         return ResponseEntity.ok(navbarService.getNavbarMenu());
+    }
+
+    @PostMapping()
+    @Operation(summary = "메뉴 수정")
+    public ResponseEntity<Void> updateMenu(@RequestBody NavbarMenu navbarMenuRequest) {
+
+        navbarService.updateNavbarMenu(navbarMenuRequest);
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     public MenuController(NavbarService navbarService) {
