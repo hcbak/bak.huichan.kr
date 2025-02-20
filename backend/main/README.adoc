@@ -8,10 +8,32 @@
 |Java 21 LTS
 
 |Web Framework
-|Spring Boot 3.4.0
+|Spring Boot 3.4.2
 
 |Build
 |Gradle 8.11.1
 
 |API Documentation
-|Swagger 2.7.0
+|Swagger 2.8.3
+|===
+
+== Environment File
+
+src\main\resources\environment.properties
+
+[cols=3]
+|===
+|ITEM|EXAMPLE|EXPLANATION
+
+|MONGO_SERVER
+|172.17.0.0
+|MongoDB server IP address
+
+|MONGO_PORT
+|27017
+|MontoDB server port
+
+|MONGO_DATABASE
+|bak
+|MongoDB database name
+|===
