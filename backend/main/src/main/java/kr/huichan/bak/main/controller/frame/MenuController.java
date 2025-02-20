@@ -2,6 +2,7 @@ package kr.huichan.bak.main.controller.frame;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,16 @@ public class MenuController {
 
         navbarService.updateNavbarMenu(navbarMenuRequest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.RESET_CONTENT).build();
+    }
+
+    @DeleteMapping()
+    @Operation(summary = "메뉴 초기화")
+    public ResponseEntity<Void> initialMenu() {
+
+        navbarService.initialNavbar();
+
+        return ResponseEntity.status(HttpStatus.RESET_CONTENT).build();
     }
 
     public MenuController(NavbarService navbarService) {

@@ -1,5 +1,6 @@
 package kr.huichan.bak.main.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
@@ -35,6 +36,14 @@ public class NavbarService {
     public NavbarMenu initialNavbar() {
         log.info("Inserting initial data.");
 
+        // 기존 네비게이션바 삭제
+        List<NavbarMenuDocument> navbarList = navbarRepository.findAll();
+
+        for (NavbarMenuDocument navbar : navbarList) {
+            navbarRepository.delete(navbar);
+        }
+
+        // 새로운 네비게이션바 생성
         navbarRepository.insert(new NavbarMenuDocument(
             null, 
             new NavbarMenu("root", null, null)));
