@@ -1,4 +1,4 @@
-package kr.huichan.bak.main.controller.frame;
+package kr.huichan.bak.main.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +46,7 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.RESET_CONTENT).build();
     }
 
+    // 생성자 주입
     public MenuController(NavbarService navbarService) {
         this.navbarService = navbarService;
     }

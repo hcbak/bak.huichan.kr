@@ -7,8 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import kr.huichan.bak.main.document.Navbar;
 import kr.huichan.bak.main.dto.NavbarMenu;
-import kr.huichan.bak.main.dto.NavbarMenuDocument;
 import kr.huichan.bak.main.repository.NavbarRepository;
 
 @Service
@@ -37,14 +37,14 @@ public class NavbarService {
         log.info("Inserting initial data.");
 
         // 기존 네비게이션바 삭제
-        List<NavbarMenuDocument> navbarList = navbarRepository.findAll();
+        List<Navbar> navbarList = navbarRepository.findAll();
 
-        for (NavbarMenuDocument navbar : navbarList) {
+        for (Navbar navbar : navbarList) {
             navbarRepository.delete(navbar);
         }
 
         // 새로운 네비게이션바 생성
-        navbarRepository.insert(new NavbarMenuDocument(
+        navbarRepository.insert(new Navbar(
             null, 
             new NavbarMenu("root", null, null)));
 
@@ -55,9 +55,9 @@ public class NavbarService {
     public void updateNavbarMenu(NavbarMenu navbarMenuRequest) {
         log.info("Updating Navigation Bar.");
 
-        NavbarMenuDocument navbarMenu = navbarRepository.findAll().stream().findFirst().get();
+        Navbar navbarMenu = navbarRepository.findAll().stream().findFirst().get();
 
-        navbarMenu = new NavbarMenuDocument(
+        navbarMenu = new Navbar(
             navbarMenu.id(),
             navbarMenuRequest);
 

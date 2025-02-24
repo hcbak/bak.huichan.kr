@@ -4,9 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import kr.huichan.bak.main.document.Navbar;
+import kr.huichan.bak.main.document.User;
 
 @Repository
-public interface NavbarRepository extends MongoRepository<Navbar, ObjectId> {
-    
+public interface UserRepository extends MongoRepository<User, ObjectId>{
+
+    User findByUsername(String username);
+
 }
