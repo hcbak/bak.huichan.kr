@@ -3,21 +3,21 @@ package kr.huichan.bak.main.service;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import kr.huichan.bak.main.dto.UserDocument;
-import kr.huichan.bak.main.repository.UserDocumentRepository;
+import kr.huichan.bak.main.document.User;
+import kr.huichan.bak.main.repository.UserRepository;
 
 @Service
 public class MongoUserDetailService implements UserDetailsService {
 
-    private final UserDocumentRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
-    public UserDocument loadUserByUsername(String username) {
+    public User loadUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
     // 생성자 주입
-    public MongoUserDetailService(UserDocumentRepository userRepository) {
+    public MongoUserDetailService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 }

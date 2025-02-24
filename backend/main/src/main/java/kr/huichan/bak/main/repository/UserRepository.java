@@ -4,11 +4,11 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import kr.huichan.bak.main.dto.UserDocument;
+import kr.huichan.bak.main.document.User;
 
 @Repository
-public interface UserDocumentRepository extends MongoRepository<UserDocument, ObjectId>{
+public interface UserRepository extends MongoRepository<User, ObjectId>{
 
-    UserDocument findByUsername(String username);
+    User findByUsername(String username);
 
 }
