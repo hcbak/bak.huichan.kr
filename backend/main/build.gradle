@@ -22,6 +22,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:3.4.2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.4'
 
+	// Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security:3.4.2'
+
 	// SpringDoc
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3'
 
