@@ -35,6 +35,6 @@ public class User implements UserDetails {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.authorities = new HashSet<>(Collections.singletonList(new SimpleGrantedAuthority("USER")));
+        this.authorities = new HashSet<>(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }
