@@ -1,9 +1,9 @@
 package kr.huichan.bak.main.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import kr.huichan.bak.main.document.User;
 import kr.huichan.bak.main.repository.UserRepository;
 
 @Service
@@ -12,7 +12,7 @@ public class MongoUserDetailService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public User loadUserByUsername(String username) {
+    public UserDetails loadUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
