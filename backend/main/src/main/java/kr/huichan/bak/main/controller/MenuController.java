@@ -2,6 +2,7 @@ package kr.huichan.bak.main.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ public class MenuController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(summary = "메뉴 수정")
     public ResponseEntity<Void> updateMenu(@RequestBody NavbarMenu navbarMenuRequest) {
 
@@ -38,6 +40,7 @@ public class MenuController {
     }
 
     @DeleteMapping()
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @Operation(summary = "메뉴 초기화")
     public ResponseEntity<Void> initialMenu() {
 
