@@ -6,3 +6,12 @@ spring:
   data:
     mongodb:
       uri: mongodb://${MONGO_SERVER}:${MONGO_PORT}/${MONGO_DATABASE}
+
+springdoc:
+  swagger-ui:
+    filter: true
+    operationsSorter: method
+    displayRequestDuration: true
+    syntaxHighlight.theme: arta
+    persistAuthorization: true
+    doc-expansion: none
