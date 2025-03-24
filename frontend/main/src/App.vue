@@ -1,14 +1,16 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import Header from './components/Header.vue';
-
+import Header from "./components/Header.vue"
 </script>
 
 <template>
-  <Header />
-  <RouterView />
+  <header>
+    <Header />
+  </header>
+
+  <BContainer fluid="md">
+    <RouterView />
+  </BContainer>
 </template>
 
 <style scoped>
-
 </style>
