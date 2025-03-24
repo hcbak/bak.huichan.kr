@@ -1,5 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from '../utils/toast'
+
+const { showInfoToast } = useToast();
+const router = useRouter();
 
 const items = ref([
   {
@@ -29,6 +34,15 @@ const items = ref([
   }
 ]);
 
+
+const handleSubItemClick = (subItem) => {
+  if (subItem.route) {
+    router.push(subItem.route);
+  } else {
+    showInfoToast('준비 중인 기능입니다.');
+  }
+};
+
 </script>
 
 <template>
@@ -41,14 +55,20 @@ const items = ref([
           <template v-for="item in items.slice(1)" :key="item">
             <BNavItem v-if="item.route" :to="item.route">{{ item.label }}</BNavItem>
             <BNavItemDropdown v-if="item.items" :text="item.label">
-              <BDropdownItem v-for="subItem in item.items" :key="subItem" :to="subItem.route">{{ subItem.label }}</BDropdownItem>
+              <BDropdownItem
+                v-for="subItem in item.items"
+                :key="subItem"
+                @click="handleSubItemClick(subItem)"
+              >
+                {{ subItem.label }}
+              </BDropdownItem>
             </BNavItemDropdown>
           </template>
         </BNavbarNav>
       </BCollapse>
     </template>
   </BNavbar>
-  </template>
-  
-  <style scoped>
-  </style>
+</template>
+
+<style scoped>
+</style>

@@ -1,5 +1,5 @@
 <script setup>
-import Header from "./components/Header.vue"
+import Header from './components/Header.vue'
 </script>
 
 <template>
@@ -10,6 +10,8 @@ import Header from "./components/Header.vue"
   <BContainer fluid="md">
     <RouterView />
   </BContainer>
+
+  <BToastOrchestrator />
 </template>
 
 <style scoped>
