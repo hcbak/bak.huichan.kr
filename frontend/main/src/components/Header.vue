@@ -1,79 +1,70 @@
 <script setup>
-import { ref } from "vue";
-import Menubar from 'primevue/menubar';
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useToast } from '../utils/toast'
+import axios from 'axios'
 
-const items = ref([
-  {
-    label: 'Home',
-    icon: 'pi pi-home',
-    route: '/'
-  },
-  {
-    label: 'About',
-    icon: 'pi pi-star',
-    route: '/about'
-  },
-  {
-    label: 'Projects',
-    icon: 'pi pi-search',
-    items: [
-      {
-        label: 'Components',
-        icon: 'pi pi-bolt'
-      },
-      {
-        label: 'Blocks',
-        icon: 'pi pi-server'
-      },
-      {
-        label: 'UI Kit',
-        icon: 'pi pi-pencil'
-      },
-      {
-        label: 'Templates',
-        icon: 'pi pi-palette',
-        items: [
-          {
-            label: 'Apollo',
-            icon: 'pi pi-palette',
-            route: '/'
-          },
-          {
-            label: 'Ultima',
-            icon: 'pi pi-palette'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    label: 'Contact',
-    icon: 'pi pi-envelope'
+const { showInfoToast } = useToast();
+const router = useRouter();
+
+const items = ref(null);
+
+const fetchMenuItem = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API_SERVER_URI}/api/v1/menu`);
+    items.value = response.data;
+  } catch (error) {
+    console.error(error);
+    if (!items.value) {
+      items.value = {
+        name: 'Home',
+        url: '/'
+      };
+    }
   }
-]);
+};
+
+const handleSubItemClick = (subItem) => {
+  try {
+    router.push(subItem.url);
+  } catch {
+    showInfoToast('준비 중인 기능입니다.');
+  }
+};
+
+onMounted( () => {
+  fetchMenuItem();
+});
 
 </script>
 
 <template>
-  <div class="card">
-    <Menubar :model="items">
-      <template #item="{ item, props, hasSubmenu }">
-        <router-link v-if="item.route" v-slot="{ href, navigate }" :to="item.route" custom>
-          <a v-ripple :href="href" v-bind="props.action" @click="navigate">
-            <span :class="item.icon" />
-            <span>{{ item.label }}</span>
-          </a>
-        </router-link>
-        <a v-else v-ripple :href="item.url" :target="item.target" v-bind="props.action">
-          <span :class="item.icon" />
-          <span>{{ item.label }}</span>
-          <span v-if="hasSubmenu" class="pi pi-fw pi-angle-down" />
-        </a>
-      </template>
-    </Menubar>
-  </div>
+  <BNavbar toggleable="md">
+    <template v-if="items">
+      <BNavbarBrand :to="items.url">{{ items.name }}</BNavbarBrand>
+      <BNavbarToggle target="nav-collapse" />
+      <BCollapse v-if="items.sub" id="nav-collapse" is-nav>
+        <BNavbarNav>
+          <template v-for="item in items.sub" :key="item">
+            <BNavItem v-if="!item.sub" @click="handleSubItemClick(item)">{{ item.name }}</BNavItem>
+            <BNavItemDropdown v-if="item.sub" :text="item.name">
+              <BDropdownItem
+                v-for="subItem in item.sub"
+                :key="subItem"
+                @click="handleSubItemClick(subItem)"
+              >
+                {{ subItem.name }}
+              </BDropdownItem>
+            </BNavItemDropdown>
+          </template>
+        </BNavbarNav>
+        <BNavbarNav class="ms-auto mb-2 mb-lg-0">
+          <BNavItem @click="handleSubItemClick()">Sign In</BNavItem>
+        </BNavbarNav>
+      </BCollapse>
+    </template>
+  </BNavbar>
 </template>
 
 <style scoped>
-
 </style>

@@ -46,6 +46,7 @@ jobs:
         MONGO_SERVER: ${{secrets.MONGO_SERVER}}
         MONGO_PORT: ${{secrets.MONGO_PORT}}
         MONGO_DATABASE: ${{secrets.MONGO_DATABASE}}
+        CORS_ORIGIN: ${{secrets.CORS_ORIGIN}}
 
     - name: Run Tests
       run: ./gradlew test
