@@ -25,9 +25,9 @@ const fetchMenuItem = async () => {
 };
 
 const handleSubItemClick = (subItem) => {
-  if (subItem.url) {
+  try {
     router.push(subItem.url);
-  } else {
+  } catch {
     showInfoToast('준비 중인 기능입니다.');
   }
 };
@@ -57,6 +57,9 @@ onMounted( () => {
               </BDropdownItem>
             </BNavItemDropdown>
           </template>
+        </BNavbarNav>
+        <BNavbarNav class="ms-auto mb-2 mb-lg-0">
+          <BNavItem @click="handleSubItemClick()">Sign In</BNavItem>
         </BNavbarNav>
       </BCollapse>
     </template>
