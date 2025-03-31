@@ -1,5 +1,6 @@
 <script setup>
 import Header from './components/Header.vue'
+import ChatView from './views/ChatView.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import Header from './components/Header.vue'
     <RouterView />
   </BContainer>
 
+  <ChatView />
   <BToastOrchestrator />
 </template>
 

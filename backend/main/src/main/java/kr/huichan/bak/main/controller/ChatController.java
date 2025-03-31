@@ -1,5 +1,6 @@
 package kr.huichan.bak.main.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -24,11 +25,11 @@ public class ChatController {
 
     @MessageMapping("public")
     @SendTo("/api/v1/web-socket/topic/public")
-    public PublicMessageRequest publicChat(PublicMessageRequest message) {
+    public PublicMessageResponse publicChat(PublicMessageRequest message) {
         
         chatService.receivedMessage(message);
         
-        return message;
+        return new PublicMessageResponse(message.name(), message.message(), LocalDateTime.now());
     }
 
     @GetMapping("public")

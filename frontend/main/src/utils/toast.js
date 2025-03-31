@@ -18,7 +18,7 @@ export function useToast() {
         progressProps: {
           variant: 'warning',
         },
-        pos: 'bottom-end',
+        pos: 'top-end',
       },
     });
   };
@@ -32,7 +32,7 @@ export function useToast() {
         progressProps: {
           variant: 'success',
         },
-        pos: 'bottom-end',
+        pos: 'top-end',
       },
     });
   };
@@ -46,7 +46,7 @@ export function useToast() {
         progressProps: {
           variant: 'danger',
         },
-        pos: 'bottom-end',
+        pos: 'top-end',
       },
     });
   };
@@ -60,7 +60,7 @@ export function useToast() {
         progressProps: {
           variant: 'info',
         },
-        pos: 'bottom-end',
+        pos: 'top-end',
       },
     });
   };
